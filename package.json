@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
+  "author": "Weiller Carvalho, Victor Cid, Vandre Raia, Victor Vermaas, Voller Silas",
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "ttsc -p tsconfig.build.json",
