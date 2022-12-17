@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
 import dayjs from "dayjs";
 import createTicketType from "./seed-TicketType";
 import createRemotePaid from "./seed-remote-paid";
@@ -8,7 +8,6 @@ import createPresentialNoHotelPaid from "./seed-presential-no-hotel-paid";
 import createPresentialWithHotelReserved from "./seed-presential-with-hotel-reserved";
 import createPresentialWithHotelPaid from "./seed-presential-with-hotel-paid";
 const prisma = new PrismaClient();
-
 async function main() {
   let event = await prisma.event.findFirst();
   if (!event) {
@@ -21,6 +20,7 @@ async function main() {
         endsAt: dayjs().add(21, "days").toDate(),
       },
     });
+
     createTicketType();
     createRemoteReserved();
     createRemotePaid();
@@ -31,6 +31,7 @@ async function main() {
 
     console.log({ event });
   }
+
 }
 
 main()
