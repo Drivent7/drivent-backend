@@ -34,7 +34,7 @@ async function createTicket(userId: number, ticketTypeId: number) {
   const ticketData = {
     ticketTypeId,
     enrollmentId: enrollment.id,
-    status: TicketStatus.RESERVED
+    status: TicketStatus.RESERVED,
   };
 
   await ticketRepository.createTicket(ticketData);
@@ -47,7 +47,7 @@ async function createTicket(userId: number, ticketTypeId: number) {
 const ticketService = {
   getTicketTypes,
   getTicketByUserId,
-  createTicket
+  createTicket,
 };
 
 export default ticketService;
