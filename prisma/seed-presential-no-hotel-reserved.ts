@@ -10,7 +10,7 @@ export default async function createPresentialNoHotelReserved() {
 
     const userPresentialNoHotelReserved = await prisma.user.create({
       data: {
-        email: "dan@ig.com",
+        email: "wei@ig.com",
         password: hashedPassword,
       },
     });
