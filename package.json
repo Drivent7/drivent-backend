@@ -6,7 +6,7 @@
   "author": "Weiller Carvalho, Victor Cid, Vandre Raia, Victor Vermaas, Voller Silas, Alexandre Nunes",
   "scripts": {
     "prebuild": "rm -rf dist",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "ttsc -p tsconfig.build.json",
     "prepare": "husky install",
     "start": "node dist/server.js",
     "migration:run": "prisma migrate deploy",
