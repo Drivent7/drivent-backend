@@ -1,5 +1,12 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import dayjs from "dayjs";
+import createTicketType from "./seed-TicketType";
+import createRemotePaid from "./seed-remote-paid";
+import createRemoteReserved from "./seed-remote-reserved";
+import createPresentialNoHotelReserved from "./seed-presential-no-hotel-reserved";
+import createPresentialNoHotelPaid from "./seed-presential-no-hotel-paid";
+import createPresentialWithHotelReserved from "./seed-presential-with-hotel-reserved";
+import createPresentialWithHotelPaid from "./seed-presential-with-hotel-paid";
 const prisma = new PrismaClient();
 async function main() {
   let event = await prisma.event.findFirst();
@@ -13,21 +20,18 @@ async function main() {
         endsAt: dayjs().add(21, "days").toDate(),
       },
     });
+
+    createTicketType();
+    createRemoteReserved();
+    createRemotePaid();
+    createPresentialNoHotelReserved();
+    createPresentialNoHotelPaid();
+    createPresentialWithHotelReserved();
+    createPresentialWithHotelPaid();
+
+    console.log({ event });
   }
-  
-  let ticketType = await prisma.ticketType.findFirst();
-  if(!ticketType) {
-    ticketType = await prisma.ticketType.create({
-      data: 
-        {
-          name: "Online",
-          price: 23,
-          isRemote: true,
-          includesHotel: false
-        }
-    })
-  }
-  console.log({ event, ticketType });
+
 }
 
 main()
