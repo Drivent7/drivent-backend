@@ -35,7 +35,6 @@
     "express",
     "nodejs"
   ],
-  "author": "Alexandre Nunes",
   "license": "ISC",
   "prisma": {
     "seed": "npm run dev:load-envs -- ts-node prisma/seed.ts"
