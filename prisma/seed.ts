@@ -21,6 +21,7 @@ async function main() {
         endsAt: dayjs().add(21, "days").toDate(),
       },
     });
+
     createTicketType();
     createRemoteReserved();
     createRemotePaid();
