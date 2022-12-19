@@ -1,4 +1,4 @@
-import { PrismaClient, TicketStatus } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 // TicketType
@@ -11,7 +11,7 @@ export default async function createTicketType(){
       includesHotel: false,
     },
   });
-  
+
   const ticketTypeWithoutHotel = await prisma.ticketType.create({
     data: {
       name: "Sem Hotel",
@@ -27,6 +27,15 @@ export default async function createTicketType(){
       price: 600,
       isRemote: false,
       includesHotel: true,
+    },
+  });
+
+  const ticketTypePresential = await prisma.ticketType.create({
+    data: {
+      name: "Presencial",
+      price: 400,
+      isRemote: false,
+      includesHotel: false,
     },
   });
 } 

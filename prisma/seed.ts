@@ -7,7 +7,10 @@ import createPresentialNoHotelReserved from "./seed-presential-no-hotel-reserved
 import createPresentialNoHotelPaid from "./seed-presential-no-hotel-paid";
 import createPresentialWithHotelReserved from "./seed-presential-with-hotel-reserved";
 import createPresentialWithHotelPaid from "./seed-presential-with-hotel-paid";
+import createRooms from "./seed-rooms";
+import createHotels from "./seed-hotels";
 const prisma = new PrismaClient();
+
 async function main() {
   let event = await prisma.event.findFirst();
   if (!event) {
@@ -28,10 +31,11 @@ async function main() {
     createPresentialNoHotelPaid();
     createPresentialWithHotelReserved();
     createPresentialWithHotelPaid();
+    createHotels();
+    // createRooms();
 
     console.log({ event });
   }
-
 }
 
 main()
