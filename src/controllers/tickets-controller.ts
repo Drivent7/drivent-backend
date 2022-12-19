@@ -15,7 +15,6 @@ export async function getTicketTypes(req: AuthenticatedRequest, res: Response) {
 
 export async function getTickets(req: AuthenticatedRequest, res: Response) {
   const { userId } = req;
-  console.log("🚀🚀🚀 ~ file: tickets-controller.ts:18 ~ getTickets ~ userId", userId);
 
   try {
     const ticketTypes = await ticketService.getTicketByUserId(userId);
