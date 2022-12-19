@@ -12,12 +12,12 @@ export default async function createTicketType(){
     },
   });
   
-  const ticketTypePresential = await prisma.ticketType.create({
+  const ticketTypeWithoutHotel = await prisma.ticketType.create({
     data: {
-      name: "Presencial",
+      name: "Sem Hotel",
       price: 400,
       isRemote: false,
-      includesHotel: true,
+      includesHotel: false,
     },
   });
   
@@ -27,15 +27,6 @@ export default async function createTicketType(){
       price: 600,
       isRemote: false,
       includesHotel: true,
-    },
-  });
-
-  const ticketTypeWithoutHotel = await prisma.ticketType.create({
-    data: {
-      name: "Sem Hotel",
-      price: 0,
-      isRemote: false,
-      includesHotel: false,
     },
   });
 } 
