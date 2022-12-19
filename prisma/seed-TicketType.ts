@@ -1,34 +1,41 @@
 import { PrismaClient, TicketStatus } from "@prisma/client";
-import bcrypt from "bcrypt";
-import faker from "@faker-js/faker";
 const prisma = new PrismaClient();
 
 // TicketType
 export default async function createTicketType(){
   const ticketTypeRemote = await prisma.ticketType.create({
     data: {
-      name: "Ticket Remoto",
+      name: "Online",
       price: 200,
       isRemote: true,
       includesHotel: false,
     },
   });
   
-  const ticketTypePresentialWithoutHotel = await prisma.ticketType.create({
+  const ticketTypePresential = await prisma.ticketType.create({
     data: {
-      name: "Ticket Presencial s/ Hotel",
+      name: "Presencial",
       price: 400,
       isRemote: false,
-      includesHotel: false,
+      includesHotel: true,
     },
   });
   
   const ticketTypeWithHotel = await prisma.ticketType.create({
     data: {
-      name: "Ticket Presencial c/ Hotel",
+      name: "Com Hotel",
       price: 600,
       isRemote: false,
       includesHotel: true,
+    },
+  });
+
+  const ticketTypeWithoutHotel = await prisma.ticketType.create({
+    data: {
+      name: "Sem Hotel",
+      price: 0,
+      isRemote: false,
+      includesHotel: false,
     },
   });
 } 
