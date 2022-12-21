@@ -16,7 +16,6 @@ export default async function createPresentialWithHotelPaid() {
   });
 
   // Enrollment
-
   const enrollmentPresentialWithHotelPaid = await prisma.enrollment.create({
     data: {
       name: faker.name.findName(),
@@ -61,9 +60,9 @@ export default async function createPresentialWithHotelPaid() {
       cardLastDigits: faker.datatype.number({ min: 1000, max: 9999 }).toString(),
     },
   });
+
 // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   // User2
-
   const incomingPassword2 = "123456";
   const hashedPassword2 = await bcrypt.hash(incomingPassword, 10);
 
@@ -75,7 +74,6 @@ export default async function createPresentialWithHotelPaid() {
   });
 
   // Enrollment
-
   const enrollmentPresentialWithHotelPaid2 = await prisma.enrollment.create({
     data: {
       name: faker.name.findName(),
@@ -120,6 +118,7 @@ export default async function createPresentialWithHotelPaid() {
       cardLastDigits: faker.datatype.number({ min: 1000, max: 9999 }).toString(),
     },
   });
+
 // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
   // User3
   const incomingPassword3 = "123456";
@@ -133,7 +132,6 @@ export default async function createPresentialWithHotelPaid() {
   });
 
   // Enrollment
-
   const enrollmentPresentialWithHotelPaid3 = await prisma.enrollment.create({
     data: {
       name: faker.name.findName(),
