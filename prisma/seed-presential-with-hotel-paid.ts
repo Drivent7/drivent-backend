@@ -177,6 +177,63 @@ export default async function createPresentialWithHotelPaid() {
     },
   });
 
+  // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+  // User4
+  const incomingPassword4 = "123456";
+  const hashedPassword4 = await bcrypt.hash(incomingPassword, 10);
+
+  const userPresentialWithHotelPaid4 = await prisma.user.create({
+    data: {
+      email: "book4@ig.com",
+      password: hashedPassword,
+    },
+  });
+
+  // Enrollment
+  const enrollmentPresentialWithHotelPaid4 = await prisma.enrollment.create({
+    data: {
+      name: faker.name.findName(),
+      cpf: "43165498785",
+      birthday: faker.date.past(),
+      phone: faker.phone.phoneNumber("(##) 9####-####"),
+      userId: userPresentialWithHotelPaid4.id,
+      Address: {
+        create: {
+          street: faker.address.streetName(),
+          cep: faker.address.zipCode(),
+          city: faker.address.city(),
+          neighborhood: faker.address.city(),
+          number: faker.datatype.number().toString(),
+          state: faker.address.state(),
+        },
+      },
+    },
+    include: {
+      Address: true,
+    },
+  });
+
+  // Ticket
+  const TicketPresentialWithHotelPaid4 = await prisma.ticket.create({
+    data: {
+      enrollmentId: userPresentialWithHotelPaid4.id,
+      ticketTypeId: 3,
+      status: TicketStatus.PAID,
+    },
+    include: {
+      TicketType: true,
+    },
+  });
+
+  //Payment
+  const paymentPresentialWithHotel4 = await prisma.payment.create({
+    data: {
+      ticketId: TicketPresentialWithHotelPaid4.id,
+      value: TicketPresentialWithHotelPaid3.TicketType.price,
+      cardIssuer: faker.name.findName(),
+      cardLastDigits: faker.datatype.number({ min: 1000, max: 9999 }).toString(),
+    },
+  });
 
   // BOOKING
   await prisma.booking.create({
@@ -196,6 +253,13 @@ export default async function createPresentialWithHotelPaid() {
   await prisma.booking.create({
     data: {
       userId: userPresentialWithHotelPaid3.id,
+      roomId:9,
+    }
+  });
+
+  await prisma.booking.create({
+    data: {
+      userId: userPresentialWithHotelPaid4.id,
       roomId:9,
     }
   });

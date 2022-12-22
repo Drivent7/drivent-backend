@@ -28,7 +28,7 @@ export default async function createHotels() {
 
   // hotel 1
   //room cap1
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 2; i++) {
     await prisma.room.create({
       data: {
         name: faker.name.findName(),
@@ -38,7 +38,7 @@ export default async function createHotels() {
     });
   }
   //room cap2
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 5; i++) {
     await prisma.room.create({
       data: {
         name: faker.name.findName(),
@@ -81,7 +81,7 @@ export default async function createHotels() {
     });
   }
   //room cap3
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 4; i++) {
     await prisma.room.create({
       data: {
         name: faker.name.findName(),

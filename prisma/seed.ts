@@ -26,13 +26,14 @@ async function main() {
     });
 
     createTicketType();
+    createHotels();
+
     createRemoteReserved();
     createRemotePaid();
     createPresentialNoHotelReserved();
     createPresentialNoHotelPaid();
     createPresentialWithHotelReserved();
     createPresentialWithHotelPaid();
-    createHotels();
     // createRooms();
     // createBooking();
 
