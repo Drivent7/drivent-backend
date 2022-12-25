@@ -16,6 +16,18 @@ export async function listBooking(req: AuthenticatedRequest, res: Response) {
   }
 }
 
+export async function listAllBookings(req: AuthenticatedRequest, res: Response) {
+  try {
+    const { userId } = req;
+    const { roomId } = req.params;
+    const bookings = await bookingService.getAllBookings(Number(roomId));
+
+    return res.status(httpStatus.OK).send(bookings);
+  } catch (error) {
+    return res.sendStatus(httpStatus.NOT_FOUND);
+  }
+}
+
 export async function bookingRoom(req: AuthenticatedRequest, res: Response) {
   try {
     const { userId } = req;
@@ -67,4 +79,3 @@ export async function changeBooking(req: AuthenticatedRequest, res: Response) {
     return res.sendStatus(httpStatus.NOT_FOUND);
   }
 }
-
