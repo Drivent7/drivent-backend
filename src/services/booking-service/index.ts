@@ -31,7 +31,6 @@ async function checkValidBooking(roomId: number) {
 async function getAllBookings(roomId: number) {
   const room = await roomRepository.findById(roomId);
   const bookings = await bookingRepository.findByRoomId(roomId);
-
   return bookings;
 }
 

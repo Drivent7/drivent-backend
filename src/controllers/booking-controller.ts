@@ -20,9 +20,9 @@ export async function listAllBookings(req: AuthenticatedRequest, res: Response) 
   try {
     const { userId } = req;
     const { roomId } = req.params;
-    const bookings = await bookingService.getAllBookings(Number(roomId));
+    const result = await bookingService.getAllBookings(Number(roomId));
 
-    return res.status(httpStatus.OK).send(bookings);
+    return res.status(httpStatus.OK).send(result);
   } catch (error) {
     return res.sendStatus(httpStatus.NOT_FOUND);
   }
