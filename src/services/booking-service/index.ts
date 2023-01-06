@@ -11,7 +11,7 @@ async function checkEnrollmentTicket(userId: number) {
   }
   const ticket = await tikectRepository.findTicketByEnrollmentId(enrollment.id);
 
-  if (!ticket || ticket.status === "RESERVED" || ticket.TicketType.isRemote || !ticket.TicketType.includesHotel) {
+  if (!ticket || ticket.status === "RESERVED" || ticket.TicketType.isRemote) {
     throw cannotBookingError();
   }
 }
