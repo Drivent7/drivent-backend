@@ -7,8 +7,27 @@ async function findActivities() {
     } });
 }
 
+async function findActivity(id: number) {
+  return prisma.activity.findFirst({
+    where: {
+      id
+    }
+  });
+}
+
+async function makeReservation(userId: number, activityId: number) {
+  return prisma.reservation.create({
+    data: {
+      userId,
+      activityId
+    }  
+  });
+}
+
 const activityRepository = {
   findActivities,
+  makeReservation,
+  findActivity
 };
 
 export default activityRepository;
