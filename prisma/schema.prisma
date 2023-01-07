@@ -19,6 +19,7 @@ model User {
   Session    Session[]
   Enrollment Enrollment[]
   Booking    Booking[]
+  Reservations        Reservation[]
 }
 
 model Session {
@@ -147,7 +148,18 @@ model Activity {
   dateEntity         DateTime @db.Date()
   startsAt           DateTime
   endsAt             DateTime
+  Reservations        Reservation[]
   createdAt          DateTime @default(now())
   updatedAt          DateTime @updatedAt
   @@index([dateEntity])
+}
+
+model Reservation {
+  id                 Int      @id @default(autoincrement())
+  User                User     @relation(fields: [userId], references: [id])
+  userId              Int
+  Activity           Activity     @relation(fields: [activityId], references: [id])
+  activityId         Int
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
