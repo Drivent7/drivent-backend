@@ -79,3 +79,18 @@ export async function changeBooking(req: AuthenticatedRequest, res: Response) {
     return res.sendStatus(httpStatus.NOT_FOUND);
   }
 }
+
+export async function deleteBooking(req: AuthenticatedRequest, res: Response) {
+  try {
+    const { userId } = req;
+
+    const booking = await bookingService.deleteBookingByRoomId(userId);
+
+    return res.status(httpStatus.OK).send("OK!");
+  } catch (error) {
+    if (error.name === "CannotBookingError") {
+      return res.sendStatus(httpStatus.FORBIDDEN);
+    }
+    return res.sendStatus(error.message);
+  }
+}
