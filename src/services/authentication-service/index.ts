@@ -30,7 +30,7 @@ async function signInWithGitHub(params: SignInParamsGitHub): Promise<SignInResul
     user = await userRepository.create({ email });
   }
 
-  const BOLINHA = await sessionRepository.create({
+  const session = await sessionRepository.create({
     token,
     userId: user.id,
   });
