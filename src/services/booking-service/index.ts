@@ -3,6 +3,7 @@ import roomRepository from "@/repositories/room-repository";
 import bookingRepository from "@/repositories/booking-repository";
 import enrollmentRepository from "@/repositories/enrollment-repository";
 import tikectRepository from "@/repositories/ticket-repository";
+import { number } from "joi";
 
 async function checkEnrollmentTicket(userId: number) {
   const enrollment = await enrollmentRepository.findWithAddressByUserId(userId);
@@ -65,11 +66,16 @@ async function changeBookingRoomById(userId: number, roomId: number) {
   });
 }
 
+async function deleteBookingByRoomId(userId: number) {
+  return bookingRepository.deleteBooking(userId);
+}
+
 const bookingService = {
   bookingRoomById,
   getBooking,
   changeBookingRoomById,
   getAllBookings,
+  deleteBookingByRoomId,
 };
 
 export default bookingService;

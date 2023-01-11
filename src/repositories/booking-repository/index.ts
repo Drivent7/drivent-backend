@@ -1,5 +1,5 @@
 import { prisma } from "@/config";
-import { Booking } from "@prisma/client";
+import { Booking, Prisma } from "@prisma/client";
 
 type CreateParams = Omit<Booking, "id" | "createdAt" | "updatedAt">;
 type UpdateParams = Omit<Booking, "createdAt" | "updatedAt">;
@@ -50,11 +50,20 @@ async function upsertBooking({ id, roomId, userId }: UpdateParams) {
   });
 }
 
+async function deleteBooking(userId: number) {
+  return prisma.booking.deleteMany({
+    where: {
+      userId,
+    },
+  });
+}
+
 const bookingRepository = {
   create,
   findByRoomId,
   findByUserId,
   upsertBooking,
+  deleteBooking,
 };
 
 export default bookingRepository;
