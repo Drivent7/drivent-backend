@@ -10,6 +10,7 @@ import createPresentialWithHotelPaid from "./seed-presential-with-hotel-paid";
 import createRooms from "./seed-rooms";
 import createHotels from "./seed-hotels";
 import createBooking from "./seed-booking";
+import createActivities from "./seed-activities";
 const prisma = new PrismaClient();
 
 async function main() {
@@ -34,6 +35,7 @@ async function main() {
     createPresentialNoHotelPaid();
     createPresentialWithHotelReserved();
     createPresentialWithHotelPaid();
+    createActivities();
     // createRooms();
     // createBooking();
 
