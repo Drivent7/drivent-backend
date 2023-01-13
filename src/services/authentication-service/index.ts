@@ -22,13 +22,17 @@ async function signIn(params: SignInParams): Promise<SignInResult> {
 }
 
 async function signInWithGitHub(params: SignInParamsGitHub): Promise<SignInResult> {
-  const { email, token } = params;
-
+  const { email, tokens } = params;
   let user = await getUserOrFailGitHub(email);
 
   if (!user) {
-    user = await userRepository.create({ email });
+    user = await userRepository.create({
+      email: email,
+      password: tokens,
+    });
   }
+  const userId = user.id;
+  const token = jwt.sign({ userId }, process.env.JWT_SECRET);
 
   const session = await sessionRepository.create({
     token,
@@ -73,8 +77,8 @@ async function validatePasswordOrFail(password: string, userPassword: string) {
 export type SignInParams = Pick<User, "email" | "password">;
 
 export type SignInParamsGitHub = {
-  email: "email";
-  token: "token";
+  email: string;
+  tokens: string;
 };
 
 type SignInResult = {
