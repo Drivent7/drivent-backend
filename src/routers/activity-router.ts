@@ -5,7 +5,7 @@ import { getActivities, createReservation } from "@/controllers";
 const activityRouter = Router();
 
 activityRouter
-  .all("/*", authenticateToken)
+  // .all("/*", authenticateToken)
   .get("/", getActivities)
   .post("/:activityId", createReservation);
 
