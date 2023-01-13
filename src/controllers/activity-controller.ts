@@ -26,3 +26,18 @@ export async function createReservation(req: AuthenticatedRequest, res: Response
     return res.sendStatus(httpStatus.BAD_REQUEST);
   }
 }
+
+export async function deleteReservation(req: AuthenticatedRequest, res: Response) {
+  const { userId } = req;
+  const { activityId } = req.params;
+
+  try {
+    const reservation = await activitiesService.deleteReservation(userId, Number(activityId));
+    return res.status(httpStatus.OK).send(reservation);
+  } catch (error) {
+    if (error.name === "NotFoundError") {
+      return res.sendStatus(httpStatus.NOT_FOUND);
+    }
+    return res.sendStatus(httpStatus.BAD_REQUEST);
+  }
+}

@@ -37,10 +37,30 @@ async function makeReservation(userId: number, activityId: number) {
   });
 }
 
+async function findReservation(userId: number, activityId: number) {
+  return prisma.reservation.findFirst({
+    where: {
+      userId,
+      activityId
+    }
+  });
+}
+
+async function removeReservation(id: number) {
+  return prisma.reservation.delete({
+    where: {
+      id
+    }
+  });
+}
+
 const activityRepository = {
   findActivities,
   makeReservation,
-  findActivity
+  findActivity,
+  removeReservation,
+  findReservation
+
 };
 
 export default activityRepository;

@@ -15,9 +15,19 @@ async function createReservation(userId: number, activityId: number) {
   return reservation;
 }
 
+async function deleteReservation(userId: number, activityId: number) {
+  const activity = await activityRepository.findActivity(activityId);
+  if(!activity) {
+    throw notFoundError();
+  }
+  const reservation = await activityRepository.findReservation(userId, activityId);
+  await activityRepository.removeReservation(reservation.id);
+}
+
 const activitiesService = {
   getActivities,
   createReservation,
+  deleteReservation,
 };
 
 export default activitiesService;
