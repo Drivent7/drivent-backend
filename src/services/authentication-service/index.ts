@@ -23,19 +23,26 @@ async function signIn(params: SignInParams): Promise<SignInResult> {
 
 async function signInWithGitHub(params: SignInParamsGitHub): Promise<SignInResult> {
   const { email, tokens } = params;
-  let user = await getUserOrFailGitHub(email);
-
-  if (!user) {
-    user = await userRepository.create({
-      email: email,
-      password: tokens,
-    });
+  const user = await getUserOrFailGitHub(email);
+  let data;
+  let token;
+  console.log(user);
+  if (user.id === null) {
+    data = await createUserOrFailGithub(email, tokens);
   }
-  const userId = user.id;
-  const token = jwt.sign({ userId }, process.env.JWT_SECRET);
+  console.log("NAO TA APARECENDO NADA AQUI.");
+  const userId1 = user.id;
+  const userId2 = data.id;
+
+  if (!userId1 && userId2) {
+    token = jwt.sign({ userId2 }, process.env.JWT_SECRET);
+  }
+  if (userId1) {
+    token = jwt.sign({ userId1 }, process.env.JWT_SECRET);
+  }
 
   const session = await sessionRepository.create({
-    token,
+    token: token,
     userId: user.id,
   });
 
@@ -45,10 +52,18 @@ async function signInWithGitHub(params: SignInParamsGitHub): Promise<SignInResul
   };
 }
 
-async function getUserOrFailGitHub(email: string): Promise<GetUserOrFailResult> {
-  const user = await userRepository.findByEmailGitHub(email);
+async function createUserOrFailGithub(email: string, tokens: string): Promise<GetUserOrFailResult> {
+  const data = await userRepository.create({
+    email: email,
+    password: tokens,
+  });
+  return data;
+}
 
-  return user;
+async function getUserOrFailGitHub(email: string): Promise<GetUserOrFailResult> {
+  const data = await userRepository.findByEmailGitHub(email);
+
+  return data;
 }
 
 async function getUserOrFail(email: string): Promise<GetUserOrFailResult> {

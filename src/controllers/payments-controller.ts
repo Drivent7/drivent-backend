@@ -38,11 +38,13 @@ export async function paymentProcess(req: AuthenticatedRequest, res: Response) {
     }
     const payment = await paymentService.paymentProcess(ticketId, userId, cardData);
 
-    if (!payment) {
+    const cleanPayment = payment[0];
+
+    if (!cleanPayment) {
       return res.sendStatus(httpStatus.NOT_FOUND);
     }
 
-    return res.status(httpStatus.OK).send(payment);
+    return res.status(httpStatus.OK).send(cleanPayment);
   } catch (error) {
     if (error.name === "UnauthorizedError") {
       return res.sendStatus(httpStatus.UNAUTHORIZED);

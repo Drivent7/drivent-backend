@@ -1,6 +1,5 @@
 import { prisma } from "@/config";
 import { Address, Prisma } from "@prisma/client";
-import enrollmentRepository from "../enrollment-repository";
 import { CreateEnrollmentParams, UpdateEnrollmentParams } from "../enrollment-repository";
 
 async function transactions(
