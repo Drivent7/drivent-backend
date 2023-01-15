@@ -6,7 +6,7 @@ export let redis: ReturnType<typeof createClient>;
 
 export async function connectDb(): Promise<void> {
   prisma = new PrismaClient();
-  redis = createClient();
+  redis = createClient({ url: "redis://redis:6379" });
   await redis.connect();
 }
 
