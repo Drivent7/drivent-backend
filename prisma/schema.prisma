@@ -7,8 +7,10 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:14223112@db:5432/drivent?schema=public"
 }
+
+// url = env("DATABASE_URL") so serve pra maquina host, no container tava quebrando.
 
 model User {
   id         Int          @id @default(autoincrement())
